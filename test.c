@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/08 10:36:16 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/08 16:57:32 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
+/*   Updated: 2019/10/09 13:57:24 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,8 +15,30 @@
 #include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <ctype.h>
-#include "test.h"
+#include "libft.h"
+
+void	ft_clean(void *content)
+{
+	printf("Freeing : %i\n", *((int*)content));
+}
+
+void	ft_it(void *content)
+{
+	printf("%i ", *((int*)content));
+}
+
+t_list	*ft_m(void *content)
+{
+	t_list	*m;
+	void	*ncontent;
+
+	ncontent = malloc(sizeof(content));
+	*((int*)ncontent) = *((int*)content) + 10;
+	m = ft_lstnew(ncontent);
+	return (m);
+}
 
 char	ft_test(unsigned int i, char c)
 {
@@ -27,40 +49,54 @@ char	ft_test(unsigned int i, char c)
 int		main(void)
 {
 	char s[100] = "aaaaa";
-	printf("Test de ft_memset(s, 'z', 3) avec s = 'aaaaa' : %s\n",
-	ft_memset(s, 'z', 3));
+	char sbis[100] = "aaaaa";
+	printf("Test de ft_memset :\n");
+	if (!strcmp(memset(s, 'z', 3), ft_memset(sbis, 'z', 3)))
+		printf("OK\n");
+	else
+		printf("Failed : expected '%s', got '%s'.\n", s, sbis);
 
-	ft_bzero(s, 3);
-	printf("\nTest de ft_bzero(s, 3) : [%c][%c][%c][%c][%c]\n", s[0], s[1], s[2], s[3], s[4]);
+	printf("Test de ft_bzero :\n");
+	strcpy(sbis, s);
+	bzero(s, 3);
+	ft_bzero(sbis, 3);
+	int		i;
+	i = 0;
+	while (i < 5 && s[i] == sbis[i])
+		i++;
+	if (i == 5)
+		printf("OK\n");
+	else
+		printf("Failed : expected [%c][%c][%c][%c][%c], got [%c][%c][%c][%c][%c].\n", s[0], s[1], s[2], s[3], s[4], sbis[0], sbis[1], sbis[2], sbis[3], sbis[4]);
 
-	printf("\nTest de ft_memcpy(s, \"source\", 3) : %s\n",
-	ft_memcpy(s, "source", 3));
-	printf("Test de ft_memcpy(s, \"2emesource\", 8) : %s\n",
-	ft_memcpy(s, "2emesource", 8));
+	printf("Test de ft_memcpy :\n");
+	strcpy(sbis, s);
+	if (!strcmp(memcpy(s, "source", 3), ft_memcpy(sbis, "source", 3)) && !strcmp(memcpy(s, "2emesource", 8), ft_memcpy(sbis, "2emesource", 8)))
+		printf("OK\n");
+	else
+		printf("Failed : expected '%s', got '%s'.\n", s, sbis);
 
-	printf("\nTest de ft_memccpy : \n");
+	printf("Test de ft_memccpy :\n");
 	char dst[100] = "destination";
-	printf("memccpy : %p %s\n", memccpy(dst, "source", ' ', 8), dst);
 	char dst2[100] = "destination";
-	printf("ft_memccpy : %p %s\n", ft_memccpy(dst2, "source", ' ', 8), dst2);
-	printf("memccpy : %p %s\n", memccpy(dst, "2emesource", 'e', 8), dst);
-	printf("ft_memccpy : %p %s\n", ft_memccpy(dst, "2emesource", 'e', 8), dst);
+	if (memccpy(dst, "source", ' ', 8) == ft_memccpy(dst2, "source", ' ', 8) && !strcmp(dst, dst2) && (char*)memccpy(dst, "2emesource", 'e', 8) - dst == (char*)ft_memccpy(dst2, "2emesource", 'e', 8) - dst2 && !strcmp(dst, dst2))
+		printf("OK\n");
+	else
+		printf("Failed.\n");
 
-	printf("\nTest de ft_memmove : \n");
+	printf("Test de ft_memmove :\n");
 	char s1[] = "string test";
-	memmove(s1, s1 + 3, 5);
-	printf("memmove : %s\n", s1);
 	char s2[] = "string test";
-	ft_memmove(s2, s2 + 3, 5);
-	printf("ft_memmove : %s\n", s2);
-	memmove(s1 + 3, s1, 5);
-	printf("memmove : %s\n", s1);
-	ft_memmove(s2 + 3, s2, 5);
-	printf("ft_memmove : %s\n", s2);
+	if (!strcmp(memmove(s1, s1 + 3, 5), ft_memmove(s2, s2 + 3, 5)) && !strcmp(memmove(s1 + 3, s1, 5), ft_memmove(s2 + 3, s2, 5)))
+		printf("OK\n");
+	else
+		printf("Failed (tests : ft_memmove(s, s + 3, 5) and ft_memmove(s + 3, s, 5)).\n");
 
-	printf("\nTest de ft_memchr : \n");
-	printf("ft_memchr(\"source\", 'r', 2) : %s\n", ft_memchr("source", 'r', 2));
-	printf("ft_memchr(\"source\", 'r', 5) : %s\n", ft_memchr("source", 'r', 5));
+	printf("Test de ft_memchr : \n");
+	if (memchr("source", 'r', 2) == ft_memchr("source", 'r', 2) && !strcmp(memchr("source", 'r', 5), ft_memchr("source", 'r', 5)))
+		printf("OK\n");
+	else
+		printf("Failed.\n");
 
 	printf("\nTest de ft_memcmp : \n");
 	printf("0 : %d\n", ft_memcmp("test", "test", 4));
@@ -108,10 +144,10 @@ int		main(void)
 	printf("0 : %d\n", ft_isprint(127));
 
 	printf("\nTest de ft_toupper et ft_tolower :\n");
-	printf("P : %c\n", ft_toupper('P'));
-	printf("P : %c\n", ft_toupper('p'));
-	printf("p : %c\n", ft_tolower('p'));
-	printf("p : %c\n", ft_tolower('P'));
+	printf("Q : %c\n", ft_toupper('Q'));
+	printf("Q : %c\n", ft_toupper('q'));
+	printf("q : %c\n", ft_tolower('q'));
+	printf("q : %c\n", ft_tolower('Q'));
 
 	printf("\nTest de ft_strchr :\n");
 	char *str = "strinrg";
@@ -169,52 +205,32 @@ int		main(void)
 	printf("3 : %d\n", ft_atoi(" \t +3"));
 
 	printf("\nTest de ft_substr :\n");
-	printf("Chaine s : bonjour; start : 2; len : 3; resultat : %s\n",
-	ft_substr("bonjour", 2, 3));
-	printf("Chaine s : bonjour; start : 2; len : 5; resultat : %s\n",
-	ft_substr("bonjour", 2, 5));
-	printf("Chaine s : bonjour; start : 2; len : 6; resultat : %s\n",
-	ft_substr("bonjour", 2, 6));
-	printf("Chaine s : bonjour; start : 6; len : 1; resultat : %s\n",
-	ft_substr("bonjour", 6, 1));
-	printf("Chaine s : bonjour; start : 6; len : 0; resultat : %s\n",
-	ft_substr("bonjour", 6, 0));
+	printf("njo : %s\n", ft_substr("bonjour", 2, 3));
+	printf("njour : %s\n", ft_substr("bonjour", 2, 5));
+	printf("njour : %s\n", ft_substr("bonjour", 2, 6));
+	printf("r : %s\n", ft_substr("bonjour", 6, 1));
+	printf("'' : %s\n",	ft_substr("bonjour", 6, 0));
 
 	printf("\nTest de ft_strjoin :\n");
-	printf("Chaine s1 : abc; chaine s2 : def; resultat : %s\n",
-	ft_strjoin("abc", "def"));
-	printf("Chaine s1 : \"\"; chaine s2 : abc; resultat : %s\n",
-	ft_strjoin("", "abc"));
-	printf("Chaine s1 : abc; chaine s2 : \"\"; resultat : %s\n",
-	ft_strjoin("abc", ""));
-	printf("Chaine s1 : \"\"; chaine s2 : \"\"; resultat : %s\n",
-	ft_strjoin("", ""));
+	printf("abcdef : %s\n",	ft_strjoin("abc", "def"));
+	printf("abc : %s\n", ft_strjoin("", "abc"));
+	printf("abc : %s\n", ft_strjoin("abc", ""));
+	printf("'' : %s\n", ft_strjoin("", ""));
 
 	printf("\nTest de ft_strtrim :\n");
-	printf("Chaine s1 : 'bonjour', set : ' ', resultat : '%s'\n",
-	ft_strtrim("bonjour", " "));
-	printf("Chaine s1 : ' bonjour ', set : ' ', resultat : '%s'\n",
-	ft_strtrim(" bonjour ", " "));
-	printf("Chaine s1 : ' bonjour ', set : ' b', resultat : '%s'\n",
-	ft_strtrim(" bonjour ", " b"));
-	printf("Chaine s1 : ' bonjour', set : ' ', resultat : '%s'\n",
-	ft_strtrim(" bonjour", " "));
-	printf("Chaine s1 : 'bonjour ', set : ' ', resultat : '%s'\n",
-	ft_strtrim("bonjour ", " "));
-	printf("Chaine s1 : 'bonjour ', set : 'br ', resultat : '%s'\n",
-	ft_strtrim("bonjour ", "br "));
-	printf("Chaine s1 : '', set : ' ', resultat : '%s'\n",
-	ft_strtrim("", " "));
-	printf("Chaine s1 : 'test', set : '', resultat : '%s'\n",
-	ft_strtrim("test", ""));
-	printf("Chaine s1 : ' te  st ', set : ' ', resultat : '%s'\n",
-	ft_strtrim(" te st ", " "));
-	printf("Chaine s1 : ' b  ', set : 'b ', resultat : '%s'\n",
-	ft_strtrim(" b  ", "b "));
+	printf("'bonjour' : '%s'\n", ft_strtrim("bonjour", " "));
+	printf("'bonjour' : '%s'\n", ft_strtrim(" bonjour ", " "));
+	printf("'onjour' : '%s'\n", ft_strtrim(" bonjour ", " b"));
+	printf("'bonjour' : '%s'\n", ft_strtrim(" bonjour", " "));
+	printf("'bonjour' : '%s'\n", ft_strtrim("bonjour ", " "));
+	printf("'onjou' : '%s'\n", ft_strtrim("bonjour ", "br "));
+	printf("'' : '%s'\n", ft_strtrim("", " "));
+	printf("'test' : '%s'\n", ft_strtrim("test", ""));
+	printf("'te st' : '%s'\n", ft_strtrim(" te st ", " "));
+	printf("'' : '%s'\n", ft_strtrim(" b  ", "b "));
 
 	printf("\nTest de ft_split :\n");
 	char **res;
-	int i;
 	printf("Chaine s : 'bonjour a tous', separateur c : ' ', resultat :\n");
 	res = ft_split("bonjour a tous", ' ');
 	i = 0;
@@ -266,18 +282,16 @@ int		main(void)
 	printf("-2147483648 : %s\n", ft_itoa(-2147483648));
 
 	printf("\nTest de ft_strmapi :\n");
-	printf("abc en capitales : %s\n", ft_strmapi("abc", ft_test));
+	printf("ABC : %s\n", ft_strmapi("abc", ft_test));
 
-	printf("\nTest de ft_putchar_fd : lettre a ci-dessous\n");
+	printf("\nTest de ft_putchar_fd :\na :\n");
 	ft_putchar_fd('a', 1);
-	printf("\nTest de ft_putchar_fd : lettre b dans fichier testputchar\n");
 	int fd = open("testputchar", O_WRONLY | O_CREAT, 0777);
 	ft_putchar_fd('b', fd);
 	close(fd);
 
 	printf("\nTest de ft_putstr_fd : mot abc ci-dessous\n");
 	ft_putstr_fd("abc", 1);
-	printf("\nTest de ft_putstr_fd : mot def dans fichier testputstr\n");
 	fd = open("testputstr", O_WRONLY | O_CREAT, 0777);
 	ft_putstr_fd("def", fd);
 	close(fd);
@@ -295,9 +309,74 @@ int		main(void)
 	ft_putnbr_fd(-5, 1);
 	printf("\n-2147483648 : \n");
 	ft_putnbr_fd(-2147483648, 1);
-	printf("\nTest de ft_putnbr_fd : -593 dans fichier testputnbr\n");
 	fd = open("testputnbr", O_WRONLY | O_CREAT, 0777);
 	ft_putnbr_fd(-593, fd);
 	close(fd);
+	printf("\nVerifier : 'b' dans testputchar, 'def' dans testputstr, '-593' dans testputnbr\n");
+
+	printf("\nTEST DE LA MORT SUR LES LIST!\n");
+	int		tab[20];
+	t_list	*begin;
+	*tab = 0;
+	begin = ft_lstnew(tab);
+	printf("Test de ft_lstnew :\n");
+	if (begin && !begin->next && begin->content && *((int*)begin->content) == 0)
+		printf("OK\n");
+	else
+		printf("Failed.\n");
+
+	printf("Test de ft_lstadd_front :\n");
+	i = 0;
+	while (++i < 10)
+	{
+		tab[i] = i;
+		ft_lstadd_front(&begin, ft_lstnew(tab + i));
+	}
+	t_list	*tmp = begin;
+	printf("should print number from 9 to 0.\n");
+	while (tmp)
+	{
+		printf("%i ", *((int*)tmp->content));
+		tmp = tmp->next;
+	}
+	printf("\nTest de ft_lstsize :\n");
+	if (ft_lstsize(begin) == 10)
+		printf("OK\n");
+	else
+		printf("Failed.\n");
+
+	printf("Test de ft_lstlast :\n");
+	if (*((int*)(ft_lstlast(begin)->content)) == 0)
+		printf("OK\n");
+	else
+		printf("Failed.\n");
+
+	printf("Test de ft_lstadd_back :\n");
+	i = 0;
+	while (++i < 10)
+	{
+		tab[i + 10] = -i;
+		ft_lstadd_back(&begin, ft_lstnew(tab + i + 10));
+	}
+	tmp = begin;
+	printf("should print number from 9 to -9.\n");
+	while (tmp)
+	{
+		printf("%i ", *((int*)tmp->content));
+		tmp = tmp->next;
+	}
+	printf("\nTest de ft_lstiter :\n");
+	ft_lstiter(begin, &ft_it);
+	printf("\nTest de ft_lstmap :\n");
+	t_list		*map;
+	map = ft_lstmap(begin, &ft_m);
+	printf("mapped (+10)\n");
+	while (map)
+	{
+		if (begin->content)
+			printf("%i ", *((int*)(map->content)));
+		map = map->next;
+	}
+	printf("\n");
 	return (0);
 }
