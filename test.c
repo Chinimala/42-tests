@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/09 13:57:24 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/12 15:06:34 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,11 +17,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <limits.h>
 #include "libft.h"
 
 void	ft_clean(void *content)
 {
 	printf("Freeing : %i\n", *((int*)content));
+}
+
+void	ft_del(void *content)
+{
+	*(int*)content = 0;
+	return ;
 }
 
 void	ft_it(void *content)
@@ -48,9 +55,9 @@ char	ft_test(unsigned int i, char c)
 
 int		main(void)
 {
+	printf("Test de ft_memset :\n");
 	char s[100] = "aaaaa";
 	char sbis[100] = "aaaaa";
-	printf("Test de ft_memset :\n");
 	if (!strcmp(memset(s, 'z', 3), ft_memset(sbis, 'z', 3)))
 		printf("OK\n");
 	else
@@ -99,11 +106,11 @@ int		main(void)
 		printf("Failed.\n");
 
 	printf("\nTest de ft_memcmp : \n");
-	printf("0 : %d\n", ft_memcmp("test", "test", 4));
-	printf("-50 : %d\n", ft_memcmp("test", "test2", 5));
-	printf("0 : %d\n", ft_memcmp("test", "test2", 4));
-	printf("128 : %d\n", ft_memcmp("\200", "\0", 4));
-	printf("1 : %d\n", ft_memcmp("tesu", "test", 6));
+	printf("%d : %d\n", memcmp("test", "test", 4), ft_memcmp("test", "test", 4));
+	printf("%d : %d\n", memcmp("test", "test2", 5), ft_memcmp("test", "test2", 5));
+	printf("%d : %d\n", memcmp("test", "test2", 4), ft_memcmp("test", "test2", 4));
+	printf("%d : %d\n", memcmp("\200", "\0", 4), ft_memcmp("\200", "\0", 4));
+	printf("%d : %d\n", memcmp("tesu", "test", 6), ft_memcmp("tesu", "test", 6));
 
 	printf("\nTest de ft_strlen : \n");
 	printf("0 : %lu\n", ft_strlen(""));
@@ -203,6 +210,20 @@ int		main(void)
 	printf("0 : %d\n", ft_atoi("---48"));
 	printf("0 : %d\n", ft_atoi("-+596"));
 	printf("3 : %d\n", ft_atoi(" \t +3"));
+	printf("%d (long max %ld) : %d\n", atoi("9223372036854775807"), LONG_MAX, ft_atoi("9223372036854775807"));
+	printf("%d (long max + 1) : %d\n", atoi("9223372036854775808"), ft_atoi("9223372036854775808"));
+	printf("%d (long min %ld) : %d\n", atoi("−9223372036854775808"), LONG_MIN, ft_atoi("−9223372036854775808"));
+	printf("%d (long min - 1) : %d\n", atoi("−9223372036854775809"), ft_atoi("−9223372036854775809"));
+
+	printf("\nTest (simple compilation/free) de ft_calloc;\n");
+	char *ptr;
+	ptr = ft_calloc(5, sizeof(int));
+	free(ptr);
+
+	printf("\nTest de ft_strdup :\n");
+	ptr = ft_strdup("string");
+	printf("'string' : %s\n", ptr);
+	free(ptr);
 
 	printf("\nTest de ft_substr :\n");
 	printf("njo : %s\n", ft_substr("bonjour", 2, 3));
@@ -218,7 +239,7 @@ int		main(void)
 	printf("'' : %s\n", ft_strjoin("", ""));
 
 	printf("\nTest de ft_strtrim :\n");
-	printf("'bonjour' : '%s'\n", ft_strtrim("bonjour", " "));
+	printf("'bonjour' : %s\n", ft_strtrim("bonjour", " "));
 	printf("'bonjour' : '%s'\n", ft_strtrim(" bonjour ", " "));
 	printf("'onjour' : '%s'\n", ft_strtrim(" bonjour ", " b"));
 	printf("'bonjour' : '%s'\n", ft_strtrim(" bonjour", " "));
@@ -292,8 +313,16 @@ int		main(void)
 
 	printf("\nTest de ft_putstr_fd : mot abc ci-dessous\n");
 	ft_putstr_fd("abc", 1);
+	ft_putstr_fd(0, 1);
 	fd = open("testputstr", O_WRONLY | O_CREAT, 0777);
 	ft_putstr_fd("def", fd);
+	close(fd);
+	
+	printf("\nTest de ft_putendl_fd\n");
+	ft_putendl_fd("abc", 1);
+	ft_putendl_fd(0, 1);
+	fd = open("testputendl", O_WRONLY | O_CREAT, 0777);
+	ft_putendl_fd("ghi", fd);
 	close(fd);
 
 	printf("\nTest de ft_putnbr_fd :");
@@ -312,9 +341,9 @@ int		main(void)
 	fd = open("testputnbr", O_WRONLY | O_CREAT, 0777);
 	ft_putnbr_fd(-593, fd);
 	close(fd);
-	printf("\nVerifier : 'b' dans testputchar, 'def' dans testputstr, '-593' dans testputnbr\n");
+	printf("\nVerifier : 'b' dans testputchar, 'def' dans testputstr, 'ghi + nl' dans testputendl, '-593' dans testputnbr\n");
 
-	printf("\nTEST DE LA MORT SUR LES LIST!\n");
+	printf("\nBONUS LISTS !\n");
 	int		tab[20];
 	t_list	*begin;
 	*tab = 0;
@@ -325,7 +354,7 @@ int		main(void)
 	else
 		printf("Failed.\n");
 
-	printf("Test de ft_lstadd_front :\n");
+	printf("\nTest de ft_lstadd_front :\n");
 	i = 0;
 	while (++i < 10)
 	{
@@ -333,25 +362,26 @@ int		main(void)
 		ft_lstadd_front(&begin, ft_lstnew(tab + i));
 	}
 	t_list	*tmp = begin;
-	printf("should print number from 9 to 0.\n");
+	printf("Should print numbers from 9 to 0.\n");
 	while (tmp)
 	{
 		printf("%i ", *((int*)tmp->content));
 		tmp = tmp->next;
 	}
-	printf("\nTest de ft_lstsize :\n");
+
+	printf("\n\nTest de ft_lstsize :\n");
 	if (ft_lstsize(begin) == 10)
 		printf("OK\n");
 	else
 		printf("Failed.\n");
 
-	printf("Test de ft_lstlast :\n");
+	printf("\nTest de ft_lstlast :\n");
 	if (*((int*)(ft_lstlast(begin)->content)) == 0)
 		printf("OK\n");
 	else
 		printf("Failed.\n");
 
-	printf("Test de ft_lstadd_back :\n");
+	printf("\nTest de ft_lstadd_back :\n");
 	i = 0;
 	while (++i < 10)
 	{
@@ -359,24 +389,47 @@ int		main(void)
 		ft_lstadd_back(&begin, ft_lstnew(tab + i + 10));
 	}
 	tmp = begin;
-	printf("should print number from 9 to -9.\n");
+	printf("Should print numbers from 9 to -9 :\n");
 	while (tmp)
 	{
 		printf("%i ", *((int*)tmp->content));
 		tmp = tmp->next;
 	}
-	printf("\nTest de ft_lstiter :\n");
+
+	printf("\n\nTest de ft_lstdelone :\n");
+	tmp = begin->next;
+	ft_lstdelone(begin, ft_del);
+	begin = tmp;
+	printf("Should print numbers from 8 to -9 :\n");
+	while (tmp)
+	{
+		printf("%i ", *((int*)tmp->content));
+		tmp = tmp->next;
+	}
+
+	printf("\n\nTest de ft_lstiter :\n");
 	ft_lstiter(begin, &ft_it);
-	printf("\nTest de ft_lstmap :\n");
+
+	printf("\n\nTest de ft_lstmap (+10) :\n");
 	t_list		*map;
 	map = ft_lstmap(begin, &ft_m);
-	printf("mapped (+10)\n");
 	while (map)
 	{
 		if (begin->content)
 			printf("%i ", *((int*)(map->content)));
 		map = map->next;
 	}
+
+	printf("\n\nTest de ft_lstclear :\n");
+	ft_lstclear(&begin, ft_del);
+	printf("Should print...nothing.\n");
+	tmp = begin;
+	while (tmp)
+	{
+		printf("%i ", *((int*)tmp->content));
+		tmp = tmp->next;
+	}
+
 	printf("\n");
 	return (0);
 }
