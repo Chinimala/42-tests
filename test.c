@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/12 15:06:34 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/15 17:36:29 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,15 +36,13 @@ void	ft_it(void *content)
 	printf("%i ", *((int*)content));
 }
 
-t_list	*ft_m(void *content)
+void	*ft_m(void *content)
 {
-	t_list	*m;
-	void	*ncontent;
+	void	*newcontent;
 
-	ncontent = malloc(sizeof(content));
-	*((int*)ncontent) = *((int*)content) + 10;
-	m = ft_lstnew(ncontent);
-	return (m);
+	newcontent = malloc(sizeof(int));
+	*((int*)newcontent) = *((int*)content) + 10;
+	return (newcontent);
 }
 
 char	ft_test(unsigned int i, char c)
