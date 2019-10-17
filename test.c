@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/15 17:36:29 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/17 13:38:51 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -229,6 +229,9 @@ int		main(void)
 	printf("njour : %s\n", ft_substr("bonjour", 2, 6));
 	printf("r : %s\n", ft_substr("bonjour", 6, 1));
 	printf("'' : %s\n",	ft_substr("bonjour", 6, 0));
+	char stest[100] = "test";
+	memset(stest + 6, 'a', 50); 
+	printf("'' : %s\n",	ft_substr(stest, 10, 1));
 
 	printf("\nTest de ft_strjoin :\n");
 	printf("abcdef : %s\n",	ft_strjoin("abc", "def"));
