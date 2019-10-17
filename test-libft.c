@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/17 13:38:51 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/17 18:29:24 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -314,14 +314,12 @@ int		main(void)
 
 	printf("\nTest de ft_putstr_fd : mot abc ci-dessous\n");
 	ft_putstr_fd("abc", 1);
-	ft_putstr_fd(0, 1);
 	fd = open("testputstr", O_WRONLY | O_CREAT, 0777);
 	ft_putstr_fd("def", fd);
 	close(fd);
 	
 	printf("\nTest de ft_putendl_fd\n");
 	ft_putendl_fd("abc", 1);
-	ft_putendl_fd(0, 1);
 	fd = open("testputendl", O_WRONLY | O_CREAT, 0777);
 	ft_putendl_fd("ghi", fd);
 	close(fd);
