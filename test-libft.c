@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/18 15:24:25 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/18 17:10:50 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -409,7 +409,7 @@ int		main(void)
 	printf("\n\nTest de ft_lstiter :\n");
 	ft_lstiter(begin, &ft_it);
 
-	/*printf("\n\nTest de ft_lstmap (+10) :\n");
+	printf("\n\nTest de ft_lstmap (+10) :\n");
 	t_list		*map;
 	map = ft_lstmap(begin, &ft_m, &ft_del);
 	while (map)
@@ -417,10 +417,10 @@ int		main(void)
 		if (begin->content)
 			printf("%i ", *((int*)(map->content)));
 		map = map->next;
-	}*/
+	}
 
 	printf("\n\nTest de ft_lstclear :\n");
-	ft_lstclear(&begin, ft_del);
+	ft_lstclear(&begin, &ft_del);
 	printf("Should print...nothing.\n");
 	tmp = begin;
 	while (tmp)
