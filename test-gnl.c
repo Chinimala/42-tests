@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/17 15:10:26 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/21 11:34:58 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/21 11:38:07 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -157,7 +157,7 @@ int		main(int ac, char **av)
 
 	printf("\n32 chars + nl :\n");
 	fd = open("testfilesgnl/32charsplusnl", O_RDONLY);
-	test(fd, &line), 2;
+	test(fd, &line, 2);
 
 	printf("\n33 chars + nl :\n");
 	fd = open("testfilesgnl/33charsplusnl", O_RDONLY);
