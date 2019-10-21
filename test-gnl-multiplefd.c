@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/21 11:40:24 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/21 12:00:28 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/21 13:13:56 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -118,95 +118,103 @@ int		main(int ac, char **av)
 	test(fd, &line, 1);
 	test(fd2, &line, 1);
 
-	printf("\nOnly newline :\n");
-	fd = open("testfilesgnl/onlynewline", O_RDONLY);
-	test(fd, &line, 2);
-
-	printf("\nOnly a :\n");
-	fd = open("testfilesgnl/onlya", O_RDONLY);
-	test(fd, &line, 2);
-
-	printf("\nOnly z + nl :\n");
-	fd = open("testfilesgnl/onlyznl", O_RDONLY);
-	test(fd, &line, 2);
-
-	printf("\nLorem ipsum :\n");
+	printf("\nTwo simple files alterning :\n");
 	fd = open("testfilesgnl/loremipsum", O_RDONLY);
-	test(fd, &line, 3);
+	fd2 = open("testfilesgnl/multipleshortlines", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
 
-	printf("\nLorem ipsum + nl :\n");
-	fd = open("testfilesgnl/loremipsumnl", O_RDONLY);
-	test(fd, &line, 2);
-
-	printf("\nMultiple lines :\n");
-	fd = open("testfilesgnl/multiplelines", O_RDONLY);
-	test(fd, &line, 6);
-
-	printf("\nMultiple short lines :\n");
-	fd = open("testfilesgnl/multipleshortlines", O_RDONLY);
-	test(fd, &line, 6);
-
-	printf("\nMultiple lines, last line is long :\n");
-	fd = open("testfilesgnl/multiplelineslonglast", O_RDONLY);
-	test(fd, &line, 6);
-
-	printf("\nOnly empty lines (4) :\n");
-	fd = open("testfilesgnl/emptylines", O_RDONLY);
-	test(fd, &line, 5);
-
-	printf("\nSome empty lines (begin with full, finish with full) :\n");
-	fd = open("testfilesgnl/someemptylines", O_RDONLY);
-	test(fd, &line, 6);
-
-	printf("\nSome empty lines (begin with empty, finish with empty) :\n");
-	fd = open("testfilesgnl/someemptylines2", O_RDONLY);
-	test(fd, &line, 8);
-
+	printf("\nThree simple files alterning :\n");
+	fd = open("testfilesgnl/loremipsum", O_RDONLY);
+	fd2 = open("testfilesgnl/multipleshortlines", O_RDONLY);
+	fd3 = open("testfilesgnl/onlyznl", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd3, &line, 1);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd3, &line, 1);
+	test(fd, &line, 1);
+	
 #if BUFFER_SIZE == 32
 
 	printf("\n31 chars :\n");
 	fd = open("testfilesgnl/31chars", O_RDONLY);
-	test(fd, &line, 2);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
 
 	printf("\n30 chars + nl :\n");
 	fd = open("testfilesgnl/30charsplusnl", O_RDONLY);
-	test(fd, &line, 2);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 1);
 
 	printf("\n32 chars :\n");
 	fd = open("testfilesgnl/32chars", O_RDONLY);
-	test(fd, &line, 2);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 1);
 
 	printf("\n31 chars + nl :\n");
 	fd = open("testfilesgnl/31charsplusnl", O_RDONLY);
-	test(fd, &line, 2);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 1);
 
 	printf("\n33 chars :\n");
 	fd = open("testfilesgnl/33chars", O_RDONLY);
-	test(fd, &line, 2);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 1);
 
 	printf("\n32 chars + nl :\n");
 	fd = open("testfilesgnl/32charsplusnl", O_RDONLY);
-	test(fd, &line, 2);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 1);
 
 	printf("\n33 chars + nl :\n");
 	fd = open("testfilesgnl/33charsplusnl", O_RDONLY);
-	test(fd, &line, 2);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 1);
 
 	printf("\n30 chars + nl and small line :\n");
 	fd = open("testfilesgnl/30charsplusnlmore", O_RDONLY);
-	test(fd, &line, 3);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 2);
 
 	printf("\n31 chars + nl and small line :\n");
 	fd = open("testfilesgnl/31charsplusnlmore", O_RDONLY);
-	test(fd, &line, 3);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 2);
 
 	printf("\n32 chars + nl and small line :\n");
 	fd = open("testfilesgnl/32charsplusnlmore", O_RDONLY);
-	test(fd, &line, 3);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 2);
 
 	printf("\n33 chars + nl and small line :\n");
 	fd = open("testfilesgnl/33charsplusnlmore", O_RDONLY);
-	test(fd, &line, 3);
+	fd2 = open("testfilesgnl/loremipsum", O_RDONLY);
+	test(fd, &line, 1);
+	test(fd2, &line, 1);
+	test(fd, &line, 2);
 #endif
 
 	return (0);
