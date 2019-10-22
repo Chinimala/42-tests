@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/21 11:40:24 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/21 13:13:56 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/22 11:07:35 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,17 +28,14 @@ void	test(int fd, char **line, int testnb)
 	while (i < testnb)
 	{
 		ret = get_next_line(fd, line);
-		if (ret != 1)
-		{
+		if (ret < 0)
 			printf("Return %i\n", ret);
-			if (ptr != *line && *line)
-				printf("Pointer has changed : %p -> %p.\n", ptr, *line);
-		}
-		else if (ret == 1)
-		{
-			printf("Line : [%s]\n", *line);
+		else
+			printf("%i - [%s]\n", ret, *line);
+		if (*line)
 			free(*line);
-		}
+		else
+			printf("Error : line = 0\n");
 		i++;
 	}
 }
@@ -84,6 +81,7 @@ int		main(int ac, char **av)
 			printf("l : %s\n", line);
 			free(line);
 		}
+		free(line);
 		return (0);
 	}
 	else if (ac == 2 && av[1][0] == 'l')
