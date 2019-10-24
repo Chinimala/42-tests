@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/21 11:40:24 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/24 12:02:19 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/24 15:17:23 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,7 @@ void	test(int fd, char **line, int testnb)
 		if (ret < 0)
 			printf("Return %i\n", ret);
 		else
-			printf("%i - [%s]\n", ret, *line);
+			printf("Fd %i - %i - [%s]\n", fd, ret, *line);
 		if (*line)
 			free(*line);
 		else
