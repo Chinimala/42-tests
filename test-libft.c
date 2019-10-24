@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/24 11:12:20 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/24 11:16:48 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -208,10 +208,10 @@ int		main(void)
 	printf("0 : %d\n", ft_atoi("---48"));
 	printf("0 : %d\n", ft_atoi("-+596"));
 	printf("3 : %d\n", ft_atoi(" \t +3"));
-	printf("%d (long max %ld) : %d\n", atoi("9223372036854775807"), LONG_MAX, ft_atoi("9223372036854775807"));
-	printf("%d (long max + 1) : %d\n", atoi("9223372036854775808"), ft_atoi("9223372036854775808"));
-	printf("%d (long min %ld) : %d\n", atoi("−9223372036854775808"), LONG_MIN, ft_atoi("−9223372036854775808"));
-	printf("%d (long min - 1) : %d\n", atoi("−9223372036854775809"), ft_atoi("−9223372036854775809"));
+	//printf("%d (long max %ld) : %d\n", atoi("9223372036854775807"), LONG_MAX, ft_atoi("9223372036854775807"));
+	//printf("%d (long max + 1) : %d\n", atoi("9223372036854775808"), ft_atoi("9223372036854775808"));
+	//printf("%d (long min %ld) : %d\n", atoi("−9223372036854775808"), LONG_MIN, ft_atoi("−9223372036854775808"));
+	//printf("%d (long min - 1) : %d\n", atoi("−9223372036854775809"), ft_atoi("−9223372036854775809"));
 
 	printf("\nTest (simple compilation/free) de ft_calloc;\n");
 	char *ptr;
