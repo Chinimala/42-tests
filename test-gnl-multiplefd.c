@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/21 11:40:24 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/22 11:07:35 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/24 12:02:19 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -105,7 +105,11 @@ int		main(int ac, char **av)
 	printf("\nMissing file alterning with some short lines :\n");
 	fd = open("testfilesgnl/multipleshortlines", O_RDONLY);
 	test(fd, &line, 1);
-	test(42, &line, 1);
+	ret = get_next_line(42, &line);
+	if (ret < 0)
+		printf("Return %i\n", ret);
+	else
+		printf("%i - [%s]\n", ret, line);
 	test(fd, &line, 1);
 
 	printf("\nEmpty file alterning with some short lines :\n");
