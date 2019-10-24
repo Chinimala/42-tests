@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/09 13:56:13 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/18 17:10:50 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/24 11:12:20 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -104,11 +104,11 @@ int		main(void)
 		printf("Failed.\n");
 
 	printf("\nTest de ft_memcmp : \n");
-	printf("%d : %d\n", memcmp("test", "test", 4), ft_memcmp("test", "test", 4));
-	printf("%d : %d\n", memcmp("test", "test2", 5), ft_memcmp("test", "test2", 5));
-	printf("%d : %d\n", memcmp("test", "test2", 4), ft_memcmp("test", "test2", 4));
-	printf("%d : %d\n", memcmp("\200", "\0", 4), ft_memcmp("\200", "\0", 4));
-	printf("%d : %d\n", memcmp("tesu", "test", 6), ft_memcmp("tesu", "test", 6));
+	printf("0 : %d\n", ft_memcmp("test", "test", 4));
+	printf("negatif : %d\n", ft_memcmp("test", "test2", 5));
+	printf("0 : %d\n", ft_memcmp("test", "test2", 4));
+	printf("positif : %d\n", ft_memcmp("\200", "\0", 4));
+	printf("positif : %d\n", ft_memcmp("tesu", "test", 6));
 
 	printf("\nTest de ft_strlen : \n");
 	printf("0 : %lu\n", ft_strlen(""));
