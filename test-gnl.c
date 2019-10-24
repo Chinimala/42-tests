@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/17 15:10:26 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/22 11:06:54 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/24 15:14:18 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,7 +100,7 @@ int		main(int ac, char **av)
 	fd = open("testfilesgnl/onlyznl", O_RDONLY);
 	test(fd, &line, 2);
 
-	printf("\nLorem ipsum :\n");
+	printf("\nLorem ipsum (+1 call) :\n");
 	fd = open("testfilesgnl/loremipsum", O_RDONLY);
 	test(fd, &line, 3);
 
