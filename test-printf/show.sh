@@ -1,9 +1,14 @@
 make all
-gcc -Wall -Wextra -Werror libftprintf.a test-printf/test-printf.c
+make bonus
+gcc -Wall -Wextra -Werror -Wformat=0 libftprintf.a test-printf/test-main.c
 i=$1+1
 awk "NR == $i" result.log | cut -d ':' -f 1
 printf "Original : ["
-./a.out $1 | tr '\n' '$' | cat
-printf "]\nYours : ["
-./a.out $1 u | tr '\n' '$' | cat
-printf "]\n"
+./a.out $1 | tr '\n' '$' | cat -e
+./a.out $1 > /dev/null
+printf "] - $?"
+printf "\nYours    : ["
+./a.out $1 u | tr '\n' '$' | cat -e
+./a.out $1 u > /dev/null
+printf "] - $?"
+printf "\n"
