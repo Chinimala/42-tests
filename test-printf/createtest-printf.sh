@@ -6,7 +6,7 @@
 #    By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/10/25 11:48:54 by aalleman     #+#   ##    ##    #+#        #
-#    Updated: 2019/11/06 11:31:54 by aalleman    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/11/09 18:43:36 by aalleman    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -18,7 +18,7 @@ head -n 40 test-printf/testbase-printf.sh > test-printf/runtest-printf.sh
 if [ $# -ge 1 ]
 then
 	sed -n "1,$endofmain p" test-printf/test-printf.c > test-printf/test-main.c
-	sed -n "/\[$1/,/\[/p" test-printf/test-printf.c >> test-printf/test-main.c
+	sed -n "/\[$1/,/\[ /p" test-printf/test-printf.c >> test-printf/test-main.c
 	echo "return (0);\n}" >> test-printf/test-main.c
 	grep "\["$1 test-printf/test-main.c | tr -d '\t' | sed 's/\/\/ \[/printf "\\n${BLUE}\[/g' | sed 's/\]/\]${NC}\\n"/' >> test-printf/runtest-printf.sh
 	sed -n "/\[$1/,/\[/p" test-printf/test-main.c | grep "return" | tr -d '\t' | sed 's/%/%%/g' | sed 's/"/\\"/g' | sed 's/return(ac == 2 ? printf(.*) : ft_printf/test "$i - /' | sed 's/);/ : ${NC}" $i /' >> test-printf/runtest-printf.sh
