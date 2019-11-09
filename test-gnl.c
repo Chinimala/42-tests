@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/17 15:10:26 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/24 15:14:18 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/09 17:22:58 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -20,10 +20,8 @@
 void	test(int fd, char **line, int testnb)
 {
 	int		ret;
-	char	*ptr;
 	int		i;
 
-	ptr = *line;
 	i = 0;
 	while (i < testnb)
 	{
