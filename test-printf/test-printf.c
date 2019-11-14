@@ -6,15 +6,16 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/23 16:54:40 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/07 16:21:47 by jgambard    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/14 12:06:18 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/ft_printf.h"
 #include <limits.h>
+
+int		ft_printf(const char *s, ...);
 
 int		main(int ac, char **av)
 {
