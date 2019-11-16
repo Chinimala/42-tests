@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/23 16:54:40 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/16 12:18:37 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/16 13:02:44 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -173,9 +173,9 @@ int		main(int ac, char **av)
 
 	// [B - Tests with minimum field width].
 	if (nb == count++)
-		return(ac == 2 ? printf("%*c", INT_MIN, 'a') : ft_printf("%*c", INT_MIN, 'a'));
+		return(ac == 2 ? printf("%*c", -1000, 'a') : ft_printf("%*c", -1000, 'a'));
 	if (nb == count++)
-		return(ac == 2 ? printf("%*s", INT_MIN, "") : ft_printf("%*s", INT_MIN, ""));
+		return(ac == 2 ? printf("%*s", -1000, "") : ft_printf("%*s", -1000, ""));
 	if (nb == count++)
 		return(ac == 2 ? printf("%1%") : ft_printf("%1%"));
 	if (nb == count++)
