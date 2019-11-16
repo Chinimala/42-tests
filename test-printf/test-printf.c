@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/23 16:54:40 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/14 12:00:28 by jgambard    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/15 17:39:48 by jgambard    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,95 +29,199 @@ int		main(int ac, char **av)
 	count = 0;
 
 
-	// [P - Tests with #].
+	// [S - Tests with ' flag].
+	setlocale(LC_ALL, "");
 	if (nb == count++)
-		return(ac == 2 ? printf("%#x", 42) : ft_printf("%#x", 42));
+		return(ac == 2 ? printf("%'i", 10000) : ft_printf("%'i", 10000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10x", 42) : ft_printf("%#10x", 42));
+		return(ac == 2 ? printf("%'i", 0) : ft_printf("%'i", 0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-10x", 42) : ft_printf("%#-10x", 42));
+		return(ac == 2 ? printf("%'i", 999) : ft_printf("%'i", 999));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010x", 42) : ft_printf("%#010x", 42));
+		return(ac == 2 ? printf("%'i", 1000) : ft_printf("%'i", 1000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10.4x", 42) : ft_printf("%#10.4x", 42));
+		return(ac == 2 ? printf("%'i", 789456) : ft_printf("%'i", 789456));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10x", 0) : ft_printf("%#10x", 0));
+		return(ac == 2 ? printf("%'i", 1000000) : ft_printf("%'i", 1000000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10.0x", 0) : ft_printf("%#10.0x", 0));
+		return(ac == 2 ? printf("%'i", 999000000) : ft_printf("%'i", 999000000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#X", 42) : ft_printf("%#X", 42));
+		return(ac == 2 ? printf("%'i", -10000) : ft_printf("%'i", -10000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10X", 42) : ft_printf("%#10X", 42));
+		return(ac == 2 ? printf("%'i", -999) : ft_printf("%'i", -999));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-10X", 42) : ft_printf("%#-10X", 42));
+		return(ac == 2 ? printf("%'i", -1000) : ft_printf("%'i", -1000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010X", 42) : ft_printf("%#010X", 42));
+		return(ac == 2 ? printf("%'i", -789456) : ft_printf("%'i", -789456));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10.4X", 42) : ft_printf("%#10.4X", 42));
+		return(ac == 2 ? printf("%'u", 10000) : ft_printf("%'u", 10000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10X", 0) : ft_printf("%#10X", 0));
+		return(ac == 2 ? printf("%'u", 0) : ft_printf("%'u", 0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10.0X", 0) : ft_printf("%#10.0X", 0));
+		return(ac == 2 ? printf("%'u", 999) : ft_printf("%'u", 999));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#f", 42.0) : ft_printf("%#f", 42.0));
+		return(ac == 2 ? printf("%'u", 1000) : ft_printf("%'u", 1000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0f", 42.0) : ft_printf("%#.0f", 42.0));
+		return(ac == 2 ? printf("%'u", 789456) : ft_printf("%'u", 789456));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0f", -42.0) : ft_printf("%#.0f", -42.0));
+		return(ac == 2 ? printf("%'u", 1000000) : ft_printf("%'u", 1000000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0f", 0.0) : ft_printf("%#.0f", 0.0));;
+		return(ac == 2 ? printf("%'u", 999000000) : ft_printf("%'u", 999000000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#5.0f", 42.0) : ft_printf("%#5.0f", 42.0));
+		return(ac == 2 ? printf("%'u", -10000) : ft_printf("%'u", -10000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-5.0f", -42.0) : ft_printf("%#-5.0f", -42.0));
+		return(ac == 2 ? printf("%'u", -999) : ft_printf("%'u", -999));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-5.0f", 0.0) : ft_printf("%#-5.0f", 0.0));;
+		return(ac == 2 ? printf("%'u", -1000) : ft_printf("%'u", -1000));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#05.0f", 42.0) : ft_printf("%#05.0f", 42.0));
+		return(ac == 2 ? printf("%'u", -789456) : ft_printf("%'u", -789456));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#05.0f", -42.0) : ft_printf("%#05.0f", -42.0));
+		return(ac == 2 ? printf("%'f", 10000.0) : ft_printf("%'f", 10000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#05.0f", 0.0) : ft_printf("%#05.0f", 0.0));;
+		return(ac == 2 ? printf("%'f", 0.0) : ft_printf("%'f", 0.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#e", 42.0) : ft_printf("%#e", 42.0));
+		return(ac == 2 ? printf("%'f", 999.0) : ft_printf("%'f", 999.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0e", 42.0) : ft_printf("%#.0e", 42.0));
+		return(ac == 2 ? printf("%'f", 1000.0) : ft_printf("%'f", 1000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0e", -42.0) : ft_printf("%#.0e", -42.0));
+		return(ac == 2 ? printf("%'f", 789456.0) : ft_printf("%'f", 789456.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0e", 0.0) : ft_printf("%#.0e", 0.0));;
+		return(ac == 2 ? printf("%'f", 1000000.0) : ft_printf("%'f", 1000000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10.0e", 42.0) : ft_printf("%#10.0e", 42.0));
+		return(ac == 2 ? printf("%'f", 999000000.0) : ft_printf("%'f", 999000000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-10.0e", -42.0) : ft_printf("%#-10.0e", -42.0));
+		return(ac == 2 ? printf("%'f", -10000.0) : ft_printf("%'f", -10000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-10.0e", 0.0) : ft_printf("%#-10.0e", 0.0));;
+		return(ac == 2 ? printf("%'f", -999.0) : ft_printf("%'f", -999.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010.0e", 42.0) : ft_printf("%#010.0e", 42.0));
+		return(ac == 2 ? printf("%'f", -1000.0) : ft_printf("%'f", -1000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010.0e", -42.0) : ft_printf("%#010.0e", -42.0));
+		return(ac == 2 ? printf("%'f", -789456.0) : ft_printf("%'f", -789456.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010.0e", 0.0) : ft_printf("%#010.0e", 0.0));;
+		return(ac == 2 ? printf("%'g", 10000.0) : ft_printf("%'g", 10000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#g", 42.0) : ft_printf("%#g", 42.0));
+		return(ac == 2 ? printf("%'g", 0.0) : ft_printf("%'g", 0.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0g", 42.0) : ft_printf("%#.0g", 42.0));
+		return(ac == 2 ? printf("%'g", 999.0) : ft_printf("%'g", 999.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0g", -42.0) : ft_printf("%#.0g", -42.0));
+		return(ac == 2 ? printf("%'g", 1000.0) : ft_printf("%'g", 1000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#.0g", 0.0) : ft_printf("%#.0g", 0.0));;
+		return(ac == 2 ? printf("%'g", 789456.0) : ft_printf("%'g", 789456.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#10.0g", 42.0) : ft_printf("%#10.0g", 42.0));
+		return(ac == 2 ? printf("%'.10g", 1000000.0) : ft_printf("%'.10g", 1000000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-10.0g", -42.0) : ft_printf("%#-10.0g", -42.0));
+		return(ac == 2 ? printf("%'.15g", 999000000.0) : ft_printf("%'.15g", 999000000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#-10.0g", 0.0) : ft_printf("%#-10.0g", 0.0));;
+		return(ac == 2 ? printf("%'g", -10000.0) : ft_printf("%'g", -10000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010.0g", 42.0) : ft_printf("%#010.0g", 42.0));
+		return(ac == 2 ? printf("%'g", -999.0) : ft_printf("%'g", -999.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010.0g", -42.0) : ft_printf("%#010.0g", -42.0));
+		return(ac == 2 ? printf("%'g", -1000.0) : ft_printf("%'g", -1000.0));
 	if (nb == count++)
-		return(ac == 2 ? printf("%#010.0g", 0.0) : ft_printf("%#010.0g", 0.0));;
+		return(ac == 2 ? printf("%'g", -789456.0) : ft_printf("%'g", -789456.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%'g", 10000.0) : ft_printf("%'g", 10000.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%'f", 0.42) : ft_printf("%'f", 0.42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%'f", 0.0001) : ft_printf("%'f", 0.0001));
+	if (nb == count++)
+		return(ac == 2 ? printf("%'g", 0.42) : ft_printf("%'g", 0.42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%'g", 0.001) : ft_printf("%'g", 0.001));
+
+	// [Q - Tests with space flag].
+	if (nb == count++)
+		return(ac == 2 ? printf("% i", 42) : ft_printf("% i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("% i", -42) : ft_printf("% i", -42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%0 10i", 42) : ft_printf("%0 10i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%0 10i", -42) : ft_printf("%0 10i", -42));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 5i", 42) : ft_printf("% 5i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 3i", 42) : ft_printf("% 3i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("% .1i", 0) : ft_printf("% .1i", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% .0i", 0) : ft_printf("% .0i", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% f", 42.0) : ft_printf("% f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% f", -42.0) : ft_printf("% f", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 10f", 42.0) : ft_printf("% 10f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% f", 0.0) : ft_printf("% f", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10f", 0.0) : ft_printf("%- 10f", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 15f", 0.0) : ft_printf("% 15f", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% e", 42.0) : ft_printf("% e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% e", -42.0) : ft_printf("% e", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 10e", 42.0) : ft_printf("% 10e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% e", 0.0) : ft_printf("% e", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10e", 0.0) : ft_printf("%- 10e", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10e", 42.0) : ft_printf("%- 10e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10e", -42.0) : ft_printf("%- 10e", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 23e", 100000.0) : ft_printf("% 23e", 100000.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 23e", 100000.0) : ft_printf("%- 23e", 100000.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("% g", 0.00001) : ft_printf("% g", 0.00001));
+	if (nb == count++)
+		return(ac == 2 ? printf("% g", 0.000042) : ft_printf("% g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% g", -0.000042) : ft_printf("% g", -0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 10g", 0.000042) : ft_printf("% 10g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10g", 0.000042) : ft_printf("%- 10g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 10g", -0.000042) : ft_printf("% 10g", -0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10g", -0.000042) : ft_printf("%- 10g", -0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 7g", 0.000042) : ft_printf("% 7g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 7g", 0.000042) : ft_printf("%- 7g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% .2g", 121.42) : ft_printf("% .2g", 121.42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%0 10.2g", 121.42) : ft_printf("%0 10.2g", 121.42));
+	if (nb == count++)
+		return(ac == 2 ? printf("% g", 0.0001) : ft_printf("% g", 0.0001));
+	if (nb == count++)
+		return(ac == 2 ? printf("% g", 0.00042) : ft_printf("% g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% g", -0.00042) : ft_printf("% g", -0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 10g", 0.00042) : ft_printf("% 10g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10g", 0.00042) : ft_printf("%- 10g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 10g", -0.00042) : ft_printf("% 10g", -0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 10g", -0.00042) : ft_printf("%- 10g", -0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("% 7g", 0.00042) : ft_printf("% 7g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 7g", 0.00042) : ft_printf("%- 7g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%- 7g", 42.0) : ft_printf("%- 7g", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#- 7.2g", 42.0) : ft_printf("%#- 7.2g", 42.0));
+
 
 	// [A - Tests without options].
 	if (nb == count++)
@@ -3323,6 +3427,188 @@ int		main(int ac, char **av)
 		return(ac == 2 ? printf("%-15.6ls ", t) : ft_printf("%-15.6ls ", t));
 	if (nb == count++)
 		return(ac == 2 ? printf("%-15.7ls ", t) : ft_printf("%-15.7ls ", t));
+
+	// [P - Tests with #].
+	if (nb == count++)
+		return(ac == 2 ? printf("%#x", 42) : ft_printf("%#x", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10x", 42) : ft_printf("%#10x", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-10x", 42) : ft_printf("%#-10x", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010x", 42) : ft_printf("%#010x", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10.4x", 42) : ft_printf("%#10.4x", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10x", 0) : ft_printf("%#10x", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10.0x", 0) : ft_printf("%#10.0x", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#X", 42) : ft_printf("%#X", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10X", 42) : ft_printf("%#10X", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-10X", 42) : ft_printf("%#-10X", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010X", 42) : ft_printf("%#010X", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10.4X", 42) : ft_printf("%#10.4X", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10X", 0) : ft_printf("%#10X", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10.0X", 0) : ft_printf("%#10.0X", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#f", 42.0) : ft_printf("%#f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0f", 42.0) : ft_printf("%#.0f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0f", -42.0) : ft_printf("%#.0f", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0f", 0.0) : ft_printf("%#.0f", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#5.0f", 42.0) : ft_printf("%#5.0f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-5.0f", -42.0) : ft_printf("%#-5.0f", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-5.0f", 0.0) : ft_printf("%#-5.0f", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#05.0f", 42.0) : ft_printf("%#05.0f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#05.0f", -42.0) : ft_printf("%#05.0f", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#05.0f", 0.0) : ft_printf("%#05.0f", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#e", 42.0) : ft_printf("%#e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0e", 42.0) : ft_printf("%#.0e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0e", -42.0) : ft_printf("%#.0e", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0e", 0.0) : ft_printf("%#.0e", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10.0e", 42.0) : ft_printf("%#10.0e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-10.0e", -42.0) : ft_printf("%#-10.0e", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-10.0e", 0.0) : ft_printf("%#-10.0e", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010.0e", 42.0) : ft_printf("%#010.0e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010.0e", -42.0) : ft_printf("%#010.0e", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010.0e", 0.0) : ft_printf("%#010.0e", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#g", 42.0) : ft_printf("%#g", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0g", 42.0) : ft_printf("%#.0g", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0g", -42.0) : ft_printf("%#.0g", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#.0g", 0.0) : ft_printf("%#.0g", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#10.0g", 42.0) : ft_printf("%#10.0g", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-10.0g", -42.0) : ft_printf("%#-10.0g", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-10.0g", 0.0) : ft_printf("%#-10.0g", 0.0));;
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010.0g", 42.0) : ft_printf("%#010.0g", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010.0g", -42.0) : ft_printf("%#010.0g", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#010.0g", 0.0) : ft_printf("%#010.0g", 0.0));;
+
+	// [R - Tests with plus flag].
+	if (nb == count++)
+		return(ac == 2 ? printf("%+i", 42) : ft_printf("%+i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+i", -42) : ft_printf("%+i", -42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%0 10i", 42) : ft_printf("%0 10i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%0 10i", -42) : ft_printf("%0 10i", -42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+5i", 42) : ft_printf("%+5i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+3i", 42) : ft_printf("%+3i", 42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+.1i", 0) : ft_printf("%+.1i", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+.0i", 0) : ft_printf("%+.0i", 0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+f", 42.0) : ft_printf("%+f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+f", -42.0) : ft_printf("%+f", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+10f", 42.0) : ft_printf("%+10f", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+f", 0.0) : ft_printf("%+f", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10f", 0.0) : ft_printf("%-+10f", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+15f", 0.0) : ft_printf("%+15f", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+e", 42.0) : ft_printf("%+e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+e", -42.0) : ft_printf("%+e", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+10e", 42.0) : ft_printf("%+10e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+e", 0.0) : ft_printf("%+e", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10e", 0.0) : ft_printf("%-+10e", 0.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10e", 42.0) : ft_printf("%-+10e", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10e", -42.0) : ft_printf("%-+10e", -42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+23e", 100000.0) : ft_printf("%+23e", 100000.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+23e", 100000.0) : ft_printf("%-+23e", 100000.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+g", 0.00001) : ft_printf("%+g", 0.00001));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+g", 0.000042) : ft_printf("%+g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+g", -0.000042) : ft_printf("%+g", -0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+10g", 0.000042) : ft_printf("%+10g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10g", 0.000042) : ft_printf("%-+10g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+10g", -0.000042) : ft_printf("%+10g", -0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10g", -0.000042) : ft_printf("%-+10g", -0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+7g", 0.000042) : ft_printf("%+7g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+7g", 0.000042) : ft_printf("%-+7g", 0.000042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+.2g", 121.42) : ft_printf("%+.2g", 121.42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%0 10.2g", 121.42) : ft_printf("%0 10.2g", 121.42));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+g", 0.0001) : ft_printf("%+g", 0.0001));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+g", 0.00042) : ft_printf("%+g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+g", -0.00042) : ft_printf("%+g", -0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+10g", 0.00042) : ft_printf("%+10g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10g", 0.00042) : ft_printf("%-+10g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+10g", -0.00042) : ft_printf("%+10g", -0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+10g", -0.00042) : ft_printf("%-+10g", -0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%+7g", 0.00042) : ft_printf("%+7g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+7g", 0.00042) : ft_printf("%-+7g", 0.00042));
+	if (nb == count++)
+		return(ac == 2 ? printf("%-+7g", 42.0) : ft_printf("%-+7g", 42.0));
+	if (nb == count++)
+		return(ac == 2 ? printf("%#-+7.2g", 42.0) : ft_printf("%#-+7.2g", 42.0));
 
 	// [End].
 	return (0);
