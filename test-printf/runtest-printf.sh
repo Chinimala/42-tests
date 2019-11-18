@@ -39,8 +39,7 @@ make all
 make bonus
 gcc -Wall -Wextra -Werror -Wformat=0 test-printf/test-main.c libftprintf.a
 printf "\n\n${BLUE}[A - Tests without options]${NC}\n" && error=0
-test "$i - (\"%%\") : ${NC}" $i 
-test "$i - (\"%%\") : ${NC}" $i 
+test "$i - (\"\") : ${NC}" $i 
 test "$i - (\"1\") : ${NC}" $i 
 test "$i - (\"%%%%\") : ${NC}" $i 
 test "$i - (\"%%%%%%%%\") : ${NC}" $i 
@@ -52,6 +51,7 @@ test "$i - (\"%%c%%%%\", '3') : ${NC}" $i
 test "$i - (\"0%%c\", 0) : ${NC}" $i 
 test "$i - (\"%%c\", -129) : ${NC}" $i 
 test "$i - (\"%%c\", 128) : ${NC}" $i 
+test "$i - (\"%%c\", '\0') : ${NC}" $i 
 test "$i - (\"%%s\", \"Hello\") : ${NC}" $i 
 test "$i - (\"%%s%%%%\", \"Hello3\") : ${NC}" $i 
 test "$i - (\"%%s\", \"\") : ${NC}" $i 
@@ -288,6 +288,7 @@ test "$i - (\"%%.2s\", \"Hello\") : ${NC}" $i
 test "$i - (\"%%.5s\", \"Hello\") : ${NC}" $i 
 test "$i - (\"%%.6s\", \"Hello\") : ${NC}" $i 
 test "$i - (\"%%.7s\", \"Hello\") : ${NC}" $i 
+test "$i - (\"%%.s\", 42) : ${NC}" $i 
 test "$i - (\"%%.0d\", 0) : ${NC}" $i 
 test "$i - (\"%%.1d\", 0) : ${NC}" $i 
 test "$i - (\"%%.2d\", 0) : ${NC}" $i 
@@ -1039,11 +1040,13 @@ test "$i - (\"%%*.*s\", 5, 0, \"Hello\") : ${NC}" $i
 test "$i - (\"%%*.*s\", -5, 0, \"Hello\") : ${NC}" $i 
 test "$i - (\"%%*.*s\", 5, 5, \"Hello\") : ${NC}" $i 
 printf "\n\n${BLUE}[J - Tests with n]${NC}\n" && error=0
+test "$i - (\"%%n\", NULL) : ${NC}" $i 
 test "$i - (\"size = %%d\", t2) : ${NC}" $i 
 test "$i - (\"size = %%d\", t2) : ${NC}" $i 
 test "$i - (\"size = %%d\", t2) : ${NC}" $i 
 test "$i - (\"size = %%d\", t2) : ${NC}" $i 
 test "$i - (\"size = %%d\", t2) : ${NC}" $i 
+test "$i - (\"size = %%d ; size = %%d\", t2, t2bis) : ${NC}" $i 
 printf "\n\n${BLUE}[K - Tests with f]${NC}\n" && error=0
 test "$i - (\"%%f\", 0) : ${NC}" $i 
 test "$i - (\"%%.f\", 42.0) : ${NC}" $i 
@@ -1118,7 +1121,17 @@ test "$i - (\"%%.1f\", 0.01) : ${NC}" $i
 test "$i - (\"%%.0f\", -0.1) : ${NC}" $i 
 test "$i - (\"%%.12f\", 0.0000000056) : ${NC}" $i 
 test "$i - (\"%%.20f\", 0.0101010101010101) : ${NC}" $i 
-test "$i - (\"%%.21f\", 0.0101010101010101) : ${NC}" $i 
+test "$i - (\"%%.0f\", 2.51) : ${NC}" $i 
+test "$i - (\"%%.0f\", 1.5) : ${NC}" $i 
+test "$i - (\"%%.0f\", 4.5) : ${NC}" $i 
+test "$i - (\"%%.0f\", -2.5) : ${NC}" $i 
+test "$i - (\"%%.0f\", -3.5) : ${NC}" $i 
+test "$i - (\"%%.0f\", 2.5) : ${NC}" $i 
+test "$i - (\"%%.0f\", 3.5) : ${NC}" $i 
+test "$i - (\"%%.0f\", 2.45) : ${NC}" $i 
+test "$i - (\"%%.0f\", 2.35) : ${NC}" $i 
+test "$i - (\"%%.0f\", -2.35) : ${NC}" $i 
+test "$i - (\"%%.0f\", 3.451) : ${NC}" $i 
 printf "\n\n${BLUE}[L - Tests with e]${NC}\n" && error=0
 test "$i - (\"%%.4e\", 150.129) : ${NC}" $i 
 test "$i - (\"%%e\", 0.0) : ${NC}" $i 
@@ -1189,7 +1202,6 @@ test "$i - (\"%%.1e\", 0.2) : ${NC}" $i
 test "$i - (\"%%.1e\", 0.01) : ${NC}" $i 
 test "$i - (\"%%.0e\", -0.1) : ${NC}" $i 
 test "$i - (\"%%.12e\", 0.0000000056) : ${NC}" $i 
-test "$i - (\"%%.19e\", 0.01010101) : ${NC}" $i 
 printf "\n\n${BLUE}[M - Tests with g]${NC}\n" && error=0
 test "$i - (\"%%g\", 0.0) : ${NC}" $i 
 test "$i - (\"%%g\", 42.0) : ${NC}" $i 
@@ -1386,7 +1398,6 @@ test "$i - (\"%%.5g\", -0.00042) : ${NC}" $i
 test "$i - (\"%%.5g\", -0.000423) : ${NC}" $i 
 test "$i - (\"%%.5g\", INT_MIN - 1.0) : ${NC}" $i 
 test "$i - (\"%%g\", DBL_MAX) : ${NC}" $i 
-test "$i - (\"%%.50g\", DBL_MAX) : ${NC}" $i 
 test "$i - (\"%%g\", DBL_MAX + 1) : ${NC}" $i 
 test "$i - (\"%%010.3g\", 0.0) : ${NC}" $i 
 test "$i - (\"%%010.3g\", 42.0) : ${NC}" $i 
@@ -1560,6 +1571,9 @@ test "$i - (\"%%-15.4ls \", t) : ${NC}" $i
 test "$i - (\"%%-15.5ls \", t) : ${NC}" $i 
 test "$i - (\"%%-15.6ls \", t) : ${NC}" $i 
 test "$i - (\"%%-15.7ls \", t) : ${NC}" $i 
+test "$i - (\"%%ls \", t) : ${NC}" $i 
+test "$i - (\"%%-ls \", t) : ${NC}" $i 
+test "$i - (\"%%15ls \", t) : ${NC}" $i 
 printf "\n\n${BLUE}[P - Tests with #]${NC}\n" && error=0
 test "$i - (\"%%#x\", 42) : ${NC}" $i 
 test "$i - (\"%%#10x\", 42) : ${NC}" $i 
@@ -1747,4 +1761,51 @@ test "$i - (\"%%'f\", 0.42) : ${NC}" $i
 test "$i - (\"%%'f\", 0.0001) : ${NC}" $i 
 test "$i - (\"%%'g\", 0.42) : ${NC}" $i 
 test "$i - (\"%%'g\", 0.001) : ${NC}" $i 
+printf "\n\n${BLUE}[T - Tests with infinity and nan]${NC}\n" && error=0
+test "$i - (\"%%-10g\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010g\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10g\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10e\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010e\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10e\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10f\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010f\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10f\", 0.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10g\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010g\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10g\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10e\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010e\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10e\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10f\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010f\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10f\", -1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10g\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010g\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10g\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10e\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010e\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10e\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%-10f\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%010f\", 1.0 / 0.0) : ${NC}" $i 
+test "$i - (\"%%10f\", 1.0 / 0.0) : ${NC}" $i 
+printf "\n\n${BLUE}[U - Tests with o (our bonus !)]${NC}\n" && error=0
+test "$i - (\"%%o\", 042) : ${NC}" $i 
+test "$i - (\"%%o\", 0) : ${NC}" $i 
+test "$i - (\"%%o\", 8) : ${NC}" $i 
+test "$i - (\"%%10o\", 042) : ${NC}" $i 
+test "$i - (\"%%.2o\", 456789) : ${NC}" $i 
+test "$i - (\"%%-10.3o\", 456789) : ${NC}" $i 
+test "$i - (\"%%#-10o\", 042) : ${NC}" $i 
+test "$i - (\"%%#010o\", 042) : ${NC}" $i 
+test "$i - (\"%%'o\", 123456789) : ${NC}" $i 
+test "$i - (\"%%#1.o\", 0) : ${NC}" $i 
+test "$i - (\"%%#o\", 0) : ${NC}" $i 
+test "$i - (\"|%%#01o| |%%#0.10o| |%%#010o| |%%#0-10o| |%%#0+10o| |%%#0+10.o| |%%#0-10.o|\n\", 0, 0, 0, 0, 0, 0, 0) : ${NC}" $i 
+test "$i - (\"|%%#01.o| |%%02.o| |%%-03.o| |%%1.o| |%%2.o| |%%-.1o| |%%-.2o|\n\", 0, 0, 0, 0, 0, 0, 0) : ${NC}" $i 
+test "$i - (\"|%%+- +-0#+ -0 +0 -+ +0+ -+-+# 0+0-0+0-#0+ 0+ 15.8o| : %%%%+- +-0#+ -0 +0 -+ +0+ -+-+# 0+0-0+0-#0+ 0+ 15.8o\n\", nbr) : ${NC}" $i 
+test "$i - (\"|%%+- +-0#+ -0 +0 -+ +0+ -+-+# 0+0-0+0-#0+ 0+ 15.6o| : %%%%+- +-0#+ -0 +0 -+ +0+ -+-+# 0+0-0+0-#0+ 0+ 15.6o\n\", nbr) : ${NC}" $i 
+test "$i - (\"|%%+- #0 - 0 + -0# - + - 0-+ - #+- 7o| : %%%%+- #0 - 0 + -0# - + - 0-+ - #+- 7o\n\", nbr) : ${NC}" $i 
+printf "\n\n${BLUE}[Z - MIX (good test for leaks)]${NC}\n" && error=0
+test "$i - (\"012%%c3456%%s789%%%%012%%i3456%%x789%%u012%%p456789%%e012%%f3456789%%g0123456789%%o01%%lc3456%%ls789%%n012%%c3456%%s789%%%%012%%i3456%%x789%%u012%%p456789%%e012%%f3456789%%g0123456789%%o01%%lc3456%%ls789%%n\", 'A', \"TEST\", 42, 0x42, 42, (void*)42, 4.2, -4.2, 4.101, 042, 35211, y, &z, 'A', \"TEST\", -21, -0x21, 0, (void*)0x101, 4.2, -4.2, 4.101, 042, 35211, y, &z) : ${NC}" $i 
 printf "\n\n${DARK_BLUE}Result [$success/$i]${NC}"
