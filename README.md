@@ -18,7 +18,9 @@ Add flag "0" after "./a.out" to test standard input.
 To test bonus, do the same with test-gnl-multiplefd.c and "gcc -D BUFFER_SIZE=10 -Wall -Wextra -Werror get_next_line_bonus.c get_next_line_utils_bonus.c test-gnl-multiplefd.c && ./a.out".
 
 # Usage of printf test
-Copy test-printf/ directory in your printf repo. From root of your repo, run "sh test-printf/test-printf.sh".\
+Copy test-printf/ directory in your printf repo. From root of your repo, run "sh test-printf/test-printf.sh".
+
+
 To test only one category, run for instance "sh test-printf/test-printf.sh H".\
 To see one test, its original output and your output, run for example "sh test-printf/show.sh 563". It works with the last test-print.sh run.\
 So if you change a test, you have to run test-printf.sh to make the show.sh work. If you only changed your code, you can run show.sh only to see the difference.\
