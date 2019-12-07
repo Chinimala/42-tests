@@ -6,7 +6,7 @@
 /*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/23 16:54:40 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/19 15:17:35 by aalleman    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/07 17:19:51 by aalleman    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ int		main(int ac, char **av)
 	if (nb == count++)
 		return(ac == 2 ? printf("%c", 128) : ft_printf("%c", 128));
 	if (nb == count++)
-		return(ac == 2 ? printf("%c", '\0') : ft_printf("%c", '\0'));
+		return(ac == 2 ? printf("%c", 0) : ft_printf("%c", 0));
 	if (nb == count++)
 		return(ac == 2 ? printf("%s", "Hello") : ft_printf("%s", "Hello"));
 	if (nb == count++)
