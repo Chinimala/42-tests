@@ -2,6 +2,7 @@
 To test 42 exercises
 
 # Usage of libft test
+[ NEW AND BETTER TESTER, WITH MALLOC AND SEGFAULT CHECKS --> https://github.com/Tripouille/libftTester.git ]
 Copy test-libft.c in libft repo and run "make bonus" then "gcc -Wall -Wextra -Werror libft.a test-libft.c && ./a.out".\
 Check outputs manually. Cat the "testput..." files to check use of fd in ft_put... functions.
 
