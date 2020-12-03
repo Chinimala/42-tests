@@ -7,6 +7,7 @@ Copy test-libft.c in libft repo and run "make bonus" then "gcc -Wall -Wextra -We
 Check outputs manually. Cat the "testput..." files to check use of fd in ft_put... functions.
 
 # Usage of gnl test
+[ NEW AND BETTER TESTER FROM TRIPOUILLE/JGAMBARD, WITH MALLOC AND SEGFAULT CHECKS --> https://github.com/Tripouille/gnlTester.git ]  
 Copy test-gnl.c in gnl repo and run "gcc -D BUFFER_SIZE=10 -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c test-gnl.c && ./a.out".\
 Check outputs manually. Change BUFFER_SIZE. Set to 32 for tests with lines of length BUFFER_SIZE / +1 / -1.
 
