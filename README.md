@@ -20,6 +20,7 @@ Add flag "0" after "./a.out" to test standard input.
 To test bonus, do the same with test-gnl-multiplefd.c and "gcc -D BUFFER_SIZE=10 -Wall -Wextra -Werror get_next_line_bonus.c get_next_line_utils_bonus.c test-gnl-multiplefd.c && ./a.out".
 
 # Usage of printf test
+[ NEW AND BETTER TESTER FROM TRIPOUILLE/JGAMBARD, WITH EASIER UTILISATION --> https://github.com/Tripouille/printfTester.git ]  
 Copy test-printf/ directory in your printf repo. From root of your repo, run "sh test-printf/test-printf.sh".
 
 
