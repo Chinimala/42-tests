@@ -1,15 +1,15 @@
 /* ************************************************************************** */
-/*                                                          LE - /            */
-/*                                                              /             */
-/*   test-gnl-multiplefd.c                            .::    .:/ .      .::   */
-/*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: aalleman <marvin@le-101.fr>                +:+   +:    +:    +:+     */
-/*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/10/21 11:40:24 by aalleman     #+#   ##    ##    #+#       */
-/*   Updated: 2019/10/24 15:17:23 by aalleman    ###    #+. /#+    ###.fr     */
-/*                                                         /                  */
-/*                                                        /                   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test-gnl-multiplefd.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aalleman <aalleman@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/21 11:40:24 by aalleman          #+#    #+#             */
+/*   Updated: 2020/12/06 13:12:28 by aalleman         ###   ########lyon.fr   */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -20,10 +20,8 @@
 void	test(int fd, char **line, int testnb)
 {
 	int		ret;
-	char	*ptr;
 	int		i;
 
-	ptr = *line;
 	i = 0;
 	while (i < testnb)
 	{
